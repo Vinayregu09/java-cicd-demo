@@ -1,40 +1,39 @@
-package com.fun;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+package com.example;
 
 import org.junit.jupiter.api.Test;
 
-class ExcuseGeneratorTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+class CalculatorTest {
+
+    private final Calculator calculator = new Calculator();
 
     @Test
-    void excuseComesFromList() {
-        assertTrue(ExcuseGenerator.EXCUSES.contains(ExcuseGenerator.getExcuse()));
+    void testAddition() {
+        assertEquals(15, calculator.add(10, 5));
     }
 
     @Test
-    void zeroCoffeeIsZombie() {
-        assertEquals("Zombie mode", ExcuseGenerator.coffeeMood(0));
+    void testSubtraction() {
+        assertEquals(5, calculator.subtract(10, 5));
     }
 
     @Test
-    void threeCoffeesIs10x() {
-        assertEquals("10x developer", ExcuseGenerator.coffeeMood(3));
+    void testMultiplication() {
+        assertEquals(50, calculator.multiply(10, 5));
     }
 
     @Test
-    void tooMuchCoffee() {
-        assertEquals("Can hear colors", ExcuseGenerator.coffeeMood(9));
+    void testDivision() {
+        assertEquals(2.5, calculator.divide(10, 4), 0.000001);
     }
 
     @Test
-    void negativeCoffeeThrows() {
-        assertThrows(IllegalArgumentException.class, () -> ExcuseGenerator.coffeeMood(-1));
-    }
-
-    @Test
-    void panicIsCappedAt10() {
-        assertEquals(10, ExcuseGenerator.bugCountToPanic(9999));
+    void testDivisionByZero() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> calculator.divide(10, 0)
+        );
     }
 }
